@@ -22,3 +22,15 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+
+config:
+
+add the Bootstrap:
+ wefarm / app / assets / stylesheets / application.css to .scss
+ add:
+ *= require bootstrap.min
+ *= require bootstrap-responsive.min
+ before *= require_tree
+ @import "bootstrap-sprockets";
+ @import "bootstrap";
