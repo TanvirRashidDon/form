@@ -16,15 +16,21 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= link_to 'Farm', root_path, :class => 'brand' %>
+      <%= link_to 'Farm', farmers_path, :class => 'brand' %>
       <div class="nav-collapse collapse">
         <ul class="nav pull-right">
-          <li>
-            <%= link_to 'Register', register_path %>
-          </li>
-          <li>
-            <%= link_to 'Login' %>
-          </li>
+          <% if current_user %>
+            <li>
+              <%= link_to 'Logout', logout_path %>
+            </li>
+          <% else %>
+            <li>
+              <%= link_to 'Register', register_path %>
+            </li>
+            <li>
+              <%= link_to 'Login', login_path %>
+            </li>
+          <% end %>
         </ul>
       </div>
     </div>

@@ -8,17 +8,23 @@ class FarmersController < ApplicationController
   end
 
   # GET /farmers/1
-  # GET /farmers/1.json
   def show
+    @is_admin = current_user && current_user.id == @farmer.id
   end
 
   # GET /farmers/new
   def new
+    if current_user
+      redirect_to root_path, :notice => "You are already registered"
+    end
     @farmer = Farmer.new
   end
 
   # GET /farmers/1/edit
   def edit
+    if current_user.nil? || current_user.id != @farmer.id
+      redirect_to @farmer
+    end
   end
 
   # POST /farmers
@@ -26,6 +32,14 @@ class FarmersController < ApplicationController
   def create
     @farmer = Farmer.new(farmer_params)
 
+    if @farmer.save
+      session[:farmer_id] = @farmer.id
+      redirect_to @farmer, notice: 'Farmer was successfully created.'
+    else
+      render action: "new"
+    end
+
+=begin
     respond_to do |format|
       if @farmer.save
         format.html { redirect_to @farmer, notice: 'Farmer was successfully created.'}
@@ -35,6 +49,8 @@ class FarmersController < ApplicationController
         format.json { render json: @farmer.errors, status: :unprocessable_entity }
       end
     end
+=end
+
   end
 
   # PATCH/PUT /farmers/1

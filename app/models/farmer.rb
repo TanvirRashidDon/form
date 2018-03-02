@@ -16,4 +16,13 @@ class Farmer < ActiveRecord::Base
     self.password_hash = @password
   end
 
+  def self.authenticate(email, test_password)
+    farmer = Farmer.find_by_email(email)
+    if farmer && farmer.password == test_password
+      farmer
+    else
+      nil
+    end
+  end
+
 end
