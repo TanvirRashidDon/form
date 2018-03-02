@@ -1,5 +1,6 @@
 class FarmersController < ApplicationController
   before_action :set_farmer, only: [:show, :edit, :update, :destroy]
+  before_action :check_auth, only: [:edit, :update, :destroy]
 
   # GET /farmers
   # GET /farmers.json
@@ -22,9 +23,7 @@ class FarmersController < ApplicationController
 
   # GET /farmers/1/edit
   def edit
-    if current_user.nil? || current_user.id != @farmer.id
-      redirect_to @farmer
-    end
+    check_auth
   end
 
   # POST /farmers
@@ -34,7 +33,7 @@ class FarmersController < ApplicationController
 
     if @farmer.save
       session[:farmer_id] = @farmer.id
-      redirect_to @farmer, notice: 'Farmer was successfully created.'
+      redirect_to @farmer, notice: "Farmer was successfully created."
     else
       render action: "new"
     end
@@ -58,7 +57,7 @@ class FarmersController < ApplicationController
   def update
     respond_to do |format|
       if @farmer.update(farmer_params)
-        format.html { redirect_to @farmer, notice: 'Farmer was successfully updated.' }
+        format.html { redirect_to @farmer, notice: "Farmer was successfully updated." }
         format.json { render :show, status: :ok, location: @farmer }
       else
         format.html { render :edit }
@@ -70,22 +69,30 @@ class FarmersController < ApplicationController
   # DELETE /farmers/1
   # DELETE /farmers/1.json
   def destroy
+    check_auth
     @farmer.destroy
     respond_to do |format|
-      format.html { redirect_to farmers_url, notice: 'Farmer was successfully destroyed.' }
+      format.html { redirect_to farmers_url, notice: "Farmer was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   private
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_farmer
-      @farmer = Farmer.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_farmer
+    @farmer = Farmer.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def farmer_params
-      params.require(:farmer).permit(:name, :email, :password, :farm, :produce, :produce_price)#, :wepay_access_token, :wepay_account_id)
+  # Check Authentication
+  def check_auth
+    if current_user.nil? || current_user.id != @farmer.id
+      redirect_to @farmer, notice: "You are not allowed to edit!"
     end
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def farmer_params
+    params.require(:farmer).permit(:name, :email, :password, :farm, :produce, :produce_price)#, :wepay_access_token, :wepay_account_id)
+  end
 end
