@@ -1,0 +1,31 @@
+Things needs to cover:
+
+* Ruby version
+
+* System dependencies
+
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
+
+
+config:
+
+add the Bootstrap:
+ wefarm / app / assets / stylesheets / application.css to .scss
+ add:
+ *= require bootstrap.min
+ *= require bootstrap-responsive.min
+ before *= require_tree
+ @import "bootstrap-sprockets";
+ @import "bootstrap";

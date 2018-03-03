@@ -1,36 +1,18 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Simple form
+Using Bootstrap, mysql with a single table 
 
-Things you may want to cover:
+## Installation
 
-* Ruby version
+Clone the repo to your machine.
 
-* System dependencies
+```
+bundle install
+```
 
-* Configuration
+Load up rails server
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-config:
-
-add the Bootstrap:
- wefarm / app / assets / stylesheets / application.css to .scss
- add:
- *= require bootstrap.min
- *= require bootstrap-responsive.min
- before *= require_tree
- @import "bootstrap-sprockets";
- @import "bootstrap";
+```
+rails server
+```
