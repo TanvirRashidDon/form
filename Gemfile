@@ -12,9 +12,7 @@ gem 'rails', '~> 5.1.5'
 gem 'mysql2', '>= 0.3.18', '< 0.5'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
-# Use SCSS for stylesheets
-#gem 'sass-rails', '~> 5.0'
-gem 'sass-rails', '>= 3.2'
+
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -55,10 +53,18 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'jquery-rails'
-gem 'bcrypt-ruby', '~> 3.0.0', :require => "bcrypt"
 
+
+
+## Added application gems##
+# Use SCSS for stylesheets
+#gem 'sass-rails', '~> 5.0'
+gem 'sass-rails', '>= 3.2' 
 
 #bootstrap
 gem 'bootstrap-sass', '~> 3.3.7'
-gem 'sass-rails', '>= 3.2'
+
+
+gem 'jquery-rails'
+#for Bcript::Password
+gem 'bcrypt-ruby', '~> 3.0.0', :require => "bcrypt"
